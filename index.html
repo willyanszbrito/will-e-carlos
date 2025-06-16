@@ -138,6 +138,16 @@
             line-height: 1.6;
         }
 
+        .memory-text a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .memory-text a:hover {
+            text-decoration: underline;
+        }
+
         .controls {
             margin-top: auto;
             padding-top: 20px;
@@ -189,28 +199,27 @@
         }
 
         .photo-collage {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            display: flex;
+            justify-content: center;
             margin: 20px 0;
         }
 
-        .photo-placeholder {
-            background-color: #f0f0f0;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            border-radius: 5px;
+        .photo-collage-img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            border: 3px solid #64b5f6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            object-fit: contain;
         }
 
         .final-message {
             font-family: 'Dancing Script', cursive;
             font-size: 1.8rem;
             text-align: center;
-            margin: auto;
+            margin: 20px auto;
             color: #1e88e5;
+            line-height: 1.4;
         }
 
         .signature {
@@ -219,6 +228,15 @@
             text-align: right;
             margin-top: 20px;
             color: #1e88e5;
+        }
+
+        @media (max-width: 600px) {
+            .photo-collage-img {
+                max-height: 150px;
+            }
+            .final-message {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -275,10 +293,11 @@
                         </div>
                     </div>
                     
-                    <div class="photo-collage">
-                        <div class="photo-placeholder">[Foto nossa juntos]</div>
-                        <div class="photo-placeholder">[Momento especial]</div>
-                        <div class="photo-placeholder">[Sorrisos compartilhados]</div>
+                    <div class="memory">
+                        <div class="memory-date">Fusão</div>
+                        <div class="memory-text">
+                            Assim como Rubi e Safira, quero construir uma conexão que transcenda o tempo. <a href="https://www.instagram.com/reel/Cyzj3YkONcT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Veja este momento especial</a> que me lembra de nós.
+                        </div>
                     </div>
                     
                     <div class="memory">
@@ -309,19 +328,19 @@
                             O dia em que oficialmente começamos nosso namoro foi apenas a confirmação do que nossos corações já sabiam: que queremos nos conectar ainda mais. Eu faço votos de que tenhamos uma boa relação baseada no diálogo e na vontade de fazer dar certo. Eu sou a paciência. Espero que sejamos uma conversa.
                         </div>
                     </div>
+
+                    <div class="photo-collage">
+                        <img src="https://raw.githubusercontent.com/willyanszbrito/will-e-carlos/main/Carlos%20%26%20Eu.jpg" 
+                             alt="Nosso momento especial" 
+                             class="photo-collage-img">
+                    </div>
                     
                     <div class="memory">
                         <div class="memory-text">
-                            Gosto de você e de estar com você. Prometo estar ao seu lado nos dias mais tranquilose nos dias mais desafiadores. Quero construir uma parceria que celebre nossas conquistas e que seja refúgio nos momentos de cansaço. Cuidarei de cada detalhe seu - desde seu jeito tímido até seus silêncios carinhosos quando está com sono.
+                            Gosto de você e de estar com você. Prometo estar ao seu lado nos dias mais tranquilos e nos dias mais desafiadores. Quero construir uma parceria que celebre nossas conquistas e que seja refúgio nos momentos de cansaço. Cuidarei de cada detalhe seu - desde seu jeito tímido até seus silêncios carinhosos quando está com sono.
                         </div>
                     </div>
-                    <div class="memory">
-    <div class="memory-text">
-        <p>Assim como Rubi e Safira, quero construir uma conexão que transcenda o tempo. <a href="https://www.instagram.com/reel/Cyzj3YkONcT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Veja este momento especial</a> que me lembra de nós.</p>
-    </div>
-</div>
-
-<div class="signature">Com carinho,<br>Will</div>
+                    
                     <div class="signature">Com carinho,<br>Will</div>
                 </div>
                 
@@ -368,7 +387,7 @@
             bookCloseSound.play();
             currentPage = 0;
             setTimeout(() => {
-                showPage(0); // Reset para a primeira página
+                showPage(0);
             }, 1500);
         }
         
@@ -376,11 +395,6 @@
         function nextPage() {
             if (currentPage < pages.length - 1) {
                 currentPage++;
-                pageTurnSound.play();
-                showPage(currentPage);
-            } else {
-                // Se estiver na última página, volta para o início
-                currentPage = 0;
                 pageTurnSound.play();
                 showPage(currentPage);
             }
