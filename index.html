@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will & Carlos | Nossa Trajetória até aqui</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #a0d1ff, #7fbfff);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .loveBook {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            height: 500px;
+            perspective: 2000px;
+            margin: 50px auto;
+        }
+
+        .cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e88e5, #64b5f6);
+            border-radius: 10px 0 0 10px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            transform-origin: left;
+            transition: transform 1.5s;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .cover h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cover h2 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .cover p {
+            font-style: italic;
+            max-width: 80%;
+        }
+
+        .heartBeat {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .pages {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .page {
+            min-width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            transition: transform 1s;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page h3 {
+            font-family: 'Dancing Script', cursive;
+            color: #1e88e5;
+            font-size: 2rem;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .page-content {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .memory {
+            background-color: #f8f8f8;
+            border-left: 4px solid #64b5f6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .memory-date {
+            font-weight: bold;
+            color: #1e88e5;
+            margin-bottom: 5px;
+        }
+
+        .memory-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .controls {
+            margin-top: auto;
+            padding-top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #64b5f6;
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #1e88e5;
+        }
+
+        .open-book .cover {
+            transform: rotateY(-160deg);
+        }
+
+        .photo-collage {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .photo-placeholder {
+            background-color: #f0f0f0;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            border-radius: 5px;
+        }
+
+        .final-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            text-align: center;
+            margin: auto;
+            color: #1e88e5;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            text-align: right;
+            margin-top: 20px;
+            color: #1e88e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="loveBook" id="loveBook">
+        <div class="cover" id="bookCover">
+            <h1>Will & Carlos</h1>
+            <div class="heartBeat">💙</div>
+            <h2>Nossa Trajetória até aqui</h2>
+            <p>Desde 19 de maio de 2025</p>
+            <p>Toque para abrir nosso livro</p>
+        </div>
+        
+        <div class="pages" id="bookPages">
+            <!-- Página 1 -->
+            <div class="page" id="page1">
+                <h3>Como Tudo Começou</h3>
+                <div class="page-content">
+                    <div class="memory">
+                        <div class="memory-date">Maio de 2025</div>
+                        <div class="memory-text">
+                            Nossas primeiras mensagens foram cheias de descobertas. Eu ainda não imaginava que você se tornaria alguém tão especial em minha vida. No início, fui com muita cautela, mas você superou sua timidez e decidiu conhecer meu universo mais a fundo. Nossas conversas giravam em torno de Pokémon Unite, animes, mangás e - principalmente - seus olhos marejados, que me conquistaram desde o primeiro instante.
+                        </div>
+                    </div>
+                    
+                    <div class="memory">
+                        <div class="memory-date">Primeiro Encontro</div>
+                        <div class="memory-text">
+                            Nosso primeiro encontro no Amazonas Shopping foi marcante. Você me trouxe chocolate e isso revelou desde cedo seu lado atencioso e cuidadoso. Naquele momento, fiquei feliz pelo seu jeito único e pela conexão que começávamos a construir.
+                        </div>
+                    </div>
+                    
+                    <div class="memory">
+                        <div class="memory-date">Primeiro Apoio</div>
+                        <div class="memory-text">
+                            Lembro da primeira vez que você me confortou quando eu desanimei com minhas notas. Você já tinha notado meu potencial. Naquele momento, percebi que você seria meu espaço seguro nos momentos difíceis, alguém com quem eu possa ser vulnerável.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="nextPage()">Próxima Página →</button>
+                </div>
+            </div>
+            
+            <!-- Página 2 -->
+            <div class="page" id="page2">
+                <h3>Momentos Especiais</h3>
+                <div class="page-content">
+                    <div class="memory">
+                        <div class="memory-date">Torta de Banana</div>
+                        <div class="memory-text">
+                            Você me surpreendeu com a torta de banana. Foi quando percebi o quanto você se importa com os pequenos detalhes e trouxe algo que você adora para eu comer. Cada gesto seu revela um cuidado especial que torna nossa relação ainda mais interessante.
+                        </div>
+                    </div>
+                    
+                    <div class="photo-collage">
+                        <div class="photo-placeholder">[Foto nossa juntos]</div>
+                        <div class="photo-placeholder">[Momento especial]</div>
+                        <div class="photo-placeholder">[Sorrisos compartilhados]</div>
+                    </div>
+                    
+                    <div class="memory">
+                        <div class="memory-date">Seus hobbies</div>
+                        <div class="memory-text">
+                            O dia em que você me mostrou seus Pokémons no jogo foi especial. Através disso, descobri mais sobre seus gostos e o que te deixa feliz. Esses momentos de compartilhamento são os que mais valorizo em nossa relação.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="prevPage()">← Página Anterior</button>
+                    <button class="btn" onclick="nextPage()">Próxima Página →</button>
+                </div>
+            </div>
+            
+            <!-- Página 3 -->
+            <div class="page" id="page3">
+                <h3>Nosso Namoro</h3>
+                <div class="page-content">
+                    <div class="final-message">
+                        "Você tem feito dos meus dias especiais. Cada carinho, cada olhar, cada cuidado - tudo ganha um significado especial ao seu lado."
+                    </div>
+                    
+                    <div class="memory">
+                        <div class="memory-date">12 de Junho de 2025</div>
+                        <div class="memory-text">
+                            O dia em que oficialmente começamos nosso namoro foi apenas a confirmação do que nossos corações já sabiam: que queremos nos conectar ainda mais. Eu faço votos de que tenhamos uma boa relação baseada no diálogo e na vontade de fazer dar certo. Eu sou a paciência. Espero que sejamos uma conversa.
+                        </div>
+                    </div>
+                    
+                    <div class="memory">
+                        <div class="memory-text">
+                            Gosto de você e de estar com você. Prometo estar ao seu lado nos dias mais tranquilose nos dias mais desafiadores. Quero construir uma parceria que celebre nossas conquistas e que seja refúgio nos momentos de cansaço. Cuidarei de cada detalhe seu - desde seu jeito tímido até seus silêncios carinhosos quando está com sono.
+                        </div>
+                    </div>
+                    <div class="memory">
+    <div class="memory-text">
+        <p>Assim como Rubi e Safira, quero construir uma conexão que transcenda o tempo. <a href="https://www.instagram.com/reel/Cyzj3YkONcT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank">Veja este momento especial</a> que me lembra de nós.</p>
+    </div>
+</div>
+
+<div class="signature">Com carinho,<br>Will</div>
+                    <div class="signature">Com carinho,<br>Will</div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="prevPage()">← Página Anterior</button>
+                    <button class="btn" onclick="closeBook()">Fechar Livro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bookOpenSound" src="https://assets.mixkit.co/sfx/preview/mixkit-book-pages-turning-308.mp3" preload="auto"></audio>
+    <audio id="pageTurnSound" src="https://assets.mixkit.co/sfx/preview/mixkit-page-turn-single-1106.mp3" preload="auto"></audio>
+    <audio id="bookCloseSound" src="https://assets.mixkit.co/sfx/preview/mixkit-book-cover-closing-1490.mp3" preload="auto"></audio>
+
+    <script>
+        const book = document.getElementById('loveBook');
+        const bookCover = document.getElementById('bookCover');
+        const bookPages = document.getElementById('bookPages');
+        const pages = document.querySelectorAll('.page');
+        let currentPage = 0;
+        const bookOpenSound = document.getElementById('bookOpenSound');
+        const pageTurnSound = document.getElementById('pageTurnSound');
+        const bookCloseSound = document.getElementById('bookCloseSound');
+        
+        // Abrir livro (só pelo cover)
+        bookCover.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (!book.classList.contains('open-book')) {
+                book.classList.add('open-book');
+                bookOpenSound.play();
+                showPage(0);
+            }
+        });
+        
+        // Impedir que cliques nas páginas fechem o livro
+        bookPages.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Fechar livro (só pelo botão ou clicando fora)
+        function closeBook() {
+            book.classList.remove('open-book');
+            bookCloseSound.play();
+            currentPage = 0;
+            setTimeout(() => {
+                showPage(0); // Reset para a primeira página
+            }, 1500);
+        }
+        
+        // Navegação
+        function nextPage() {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                pageTurnSound.play();
+                showPage(currentPage);
+            } else {
+                // Se estiver na última página, volta para o início
+                currentPage = 0;
+                pageTurnSound.play();
+                showPage(currentPage);
+            }
+        }
+        
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                pageTurnSound.play();
+                showPage(currentPage);
+            }
+        }
+        
+        function showPage(pageIndex) {
+            pages.forEach((page, index) => {
+                page.style.transform = `translateX(-${pageIndex * 100}%)`;
+            });
+        }
+    </script>
+</body>
+</html>
